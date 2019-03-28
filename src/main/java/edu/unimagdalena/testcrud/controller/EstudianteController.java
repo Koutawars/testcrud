@@ -3,8 +3,8 @@ package edu.unimagdalena.testcrud.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +20,6 @@ public class EstudianteController {
 	
 	@RequestMapping
 	public List<Estudiante> getEstudiantes() {
-		System.out.print("\n\n\n ****************ENTRAAAAA! *********\n\n\n");
 		return estudianteService.getAllEstudiantes();
 	}
 	
@@ -30,17 +29,18 @@ public class EstudianteController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value = "/add")
-	public void addEstudiante(@ModelAttribute Estudiante estudiante) {
-		estudianteService.createEstudiante(estudiante);
+	public Estudiante addEstudiante(@RequestBody Estudiante estudiante) {
+		System.out.print(estudiante.toString());
+		return estudianteService.createEstudiante(estudiante);
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE, value = "/delete")
-	public void deleteEstudiante(@ModelAttribute float id) {
+	public void deleteEstudiante(@RequestBody float id) {
 		estudianteService.deleteEstudiante(id);
 	}
 
 	@RequestMapping(method=RequestMethod.PUT, value = "/update")
-	public void updateEstudiante(@ModelAttribute Estudiante estudiante) {
+	public void updateEstudiante(@RequestBody Estudiante estudiante) {
 		estudianteService.updateEstudiante(estudiante);
 	}
 }

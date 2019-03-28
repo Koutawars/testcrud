@@ -25,9 +25,30 @@ $(document).ready(function(){
 	  if(nombre != '' && apellido != '' && codigo != '' && edad != ''){
 		  // ajax request
 		  // $.post("/link",data, function(data,status){});
-		  // M.toast({html: 'Inscribiendo...'});
-		  console.log({nombre,apellido,codigo,edad});
-		  agregarTabla(0, nombre, apellido, codigo, edad);
+		  M.toast({html: 'Inscribiendo...'});
+		  console.log({nombre, apellido, codigo, edad});
+		  let estudiante = {
+			  nombre,
+			  apellido,
+			  codigo,
+			  edad
+		  }
+		  let request = $.ajax({
+			  url: "estudiantes/add",
+			  data: JSON.stringify(estudiante),
+			  method: "POST",
+			  contentType: "application/json",
+			  dataType: 'json'
+		  });
+			 
+			request.done(function(data) {
+				agregarTabla(data.id, data.nombre, data.apellido, data.codigo, data.edad);
+				M.toast({html: '¡Inscrito!'});
+			});
+			 
+			request.fail(function( jqXHR, textStatus ) {
+				M.toast({html: 'Fallo a inscribir. code:'+jqXHR.status});
+			});
 	  }
   });
   

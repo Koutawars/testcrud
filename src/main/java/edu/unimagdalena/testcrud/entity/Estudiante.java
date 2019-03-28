@@ -26,6 +26,16 @@ public class Estudiante {
 		super();
 	}
 	
+	
+	
+	@Override
+	public String toString() {
+		return "Estudiante [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", codigo=" + codigo
+				+ ", edad=" + edad + "]";
+	}
+
+
+
 	public Estudiante(long id, String nombre, String apellido, long codigo, int edad) {
 		super();
 		this.id = id;
