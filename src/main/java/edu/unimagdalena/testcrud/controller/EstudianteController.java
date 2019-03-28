@@ -24,18 +24,17 @@ public class EstudianteController {
 	}
 	
 	@RequestMapping("/{id}")
-	public Estudiante getEstudiantes(@PathVariable float id) {
+	public Estudiante getEstudiantes(@PathVariable Long id) {
 		return estudianteService.getEstudiante(id);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value = "/add")
 	public Estudiante addEstudiante(@RequestBody Estudiante estudiante) {
-		System.out.print(estudiante.toString());
 		return estudianteService.createEstudiante(estudiante);
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE, value = "/delete")
-	public void deleteEstudiante(@RequestBody float id) {
+	public void deleteEstudiante(@RequestBody long id) {
 		estudianteService.deleteEstudiante(id);
 	}
 

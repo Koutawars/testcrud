@@ -75,14 +75,14 @@ $(document).ready(function(){
 			  dataType: 'json'
 		  });
 			 
-			request.done(function(data) {
-				editarTabla(data.id, data.nombre, data.apellido, data.codigo, data.edad);
-				M.toast({html: '¡Editado!'});
-			});
+		  request.done(function(data) {
+			  editarTabla(data.id, data.nombre, data.apellido, data.codigo, data.edad);
+			  M.toast({html: '¡Editado!'});
+		  });
 			 
-			request.fail(function( jqXHR, textStatus ) {
-				M.toast({html: 'Fallo a editar. code:'+jqXHR.status});
-			});
+		  request.fail(function( jqXHR, textStatus ) {
+			  M.toast({html: 'Fallo a editar. code:'+jqXHR.status});
+		  });
 	  }
   });
   
@@ -103,11 +103,25 @@ function editarTabla(id, nombre, apellido, codigo, edad){
 		$('#edadEdit').val(tds[4].innerHTML);
 		M.updateTextFields();
 	});
-	
 	$('#del'+id).click(function(){
 		// AJAX Request remove
-		// M.toast({html: 'Eliminando...'});
-		$("tr[name='"+ id +"']").remove();
+		  M.toast({html: 'Eliminando...'});
+		  let request = $.ajax({
+			  url: "estudiantes/delete",
+			  data: JSON.stringify(id),
+			  method: "DELETE",
+			  contentType: "application/json"
+		  });
+		  
+		  request.done(function(data) {
+			  $("tr[name='"+ id +"']").remove();
+			  M.toast({html: '¡Eliminado!'});
+		  });
+			 
+		  request.fail(function( jqXHR, textStatus ) {
+			  M.toast({html: 'Fallo a eliminar. code:'+jqXHR.status});
+			  console.log(jqXHR);
+		  });
 	});
 }
 
@@ -126,7 +140,22 @@ function agregarTabla(id, nombre, apellido, codigo, edad){
 	});
 	$('#del'+id).click(function(){
 		// AJAX Request remove
-		// M.toast({html: 'Eliminando...'});
-		$("tr[name='"+ id +"']").remove();
+		  M.toast({html: 'Eliminando...'});
+		  let request = $.ajax({
+			  url: "estudiantes/delete",
+			  data: JSON.stringify(id),
+			  method: "DELETE",
+			  contentType: "application/json"
+		  });
+		  
+		  request.done(function(data) {
+			  $("tr[name='"+ id +"']").remove();
+			  M.toast({html: '¡Eliminado!'});
+		  });
+			 
+		  request.fail(function( jqXHR, textStatus ) {
+			  M.toast({html: 'Fallo a eliminar. code:'+jqXHR.status});
+			  console.log(jqXHR);
+		  });
 	});
 }
