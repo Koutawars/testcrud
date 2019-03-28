@@ -40,7 +40,7 @@ public class EstudianteController {
 	}
 
 	@RequestMapping(method=RequestMethod.PUT, value = "/update")
-	public void updateEstudiante(@RequestBody Estudiante estudiante) {
-		estudianteService.updateEstudiante(estudiante);
+	public Estudiante updateEstudiante(@RequestBody Estudiante estudiante) {
+		return estudianteService.updateEstudiante(estudiante);
 	}
 }

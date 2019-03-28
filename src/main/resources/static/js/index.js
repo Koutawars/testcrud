@@ -59,8 +59,30 @@ $(document).ready(function(){
 	  let edad = $('#edadEdit').val();
 	  if(nombre != '' && apellido != '' && codigo != '' && edad != ''){
 		  // Ajax request
-		  // M.toast({html: 'Editando...'});
-		  editarTabla(editando, nombre, apellido, codigo, edad);
+		  M.toast({html: 'Editando...'});
+		  let estudiante = {
+				  id:editando,
+				  nombre,
+				  apellido,
+				  codigo,
+				  edad
+			  }
+		  let request = $.ajax({
+			  url: "estudiantes/update",
+			  data: JSON.stringify(estudiante),
+			  method: "PUT",
+			  contentType: "application/json",
+			  dataType: 'json'
+		  });
+			 
+			request.done(function(data) {
+				editarTabla(data.id, data.nombre, data.apellido, data.codigo, data.edad);
+				M.toast({html: '¡Editado!'});
+			});
+			 
+			request.fail(function( jqXHR, textStatus ) {
+				M.toast({html: 'Fallo a editar. code:'+jqXHR.status});
+			});
 	  }
   });
   
