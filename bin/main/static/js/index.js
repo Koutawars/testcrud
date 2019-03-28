@@ -35,7 +35,7 @@ $(document).ready(function(){
 });
  
 function editarTabla(id, nombre, apellido, codigo, edad){
-	let markup = `<td>${id}</td><td>${nombre}</td><td>${apellido}</td><td>${codigo}</td><td>${edad}</td><td><a id="btn${id}" class="waves-effect waves-light btn modal-trigger" href="#modal1">Editar</a></td>`;
+	let markup = `<td>${id}</td><td>${nombre}</td><td>${apellido}</td><td>${codigo}</td><td>${edad}</td><td><i id="btn${id}" class="small material-icons modal-trigger btn-editar" href="#modal1">edit</i> <i id="del${id}" class="del red-text small material-icons">delete</i></td>`;
 	$("tr[name='"+ id +"']").html(markup);
 	$('#btn'+id).click(function(){
 		editando = id;
@@ -46,11 +46,17 @@ function editarTabla(id, nombre, apellido, codigo, edad){
 		$('#edadEdit').val(tds[4].innerHTML);
 		M.updateTextFields();
 	});
+	
+	$('#del'+id).click(function(){
+		// AJAX Request remove
+		// M.toast({html: 'Eliminando...'});
+		$("tr[name='"+ id +"']").remove();
+	});
 }
 
 
 function agregarTabla(id, nombre, apellido, codigo, edad){
-	let markup = `<tr name="${id}"><td>${id}</td><td>${nombre}</td><td>${apellido}</td><td>${codigo}</td><td>${edad}</td><td><a id="btn${id}" class="waves-effect waves-light btn modal-trigger" href="#modal1">Editar</a></td></tr>`;
+	let markup = `<tr name="${id}"><td>${id}</td><td>${nombre}</td><td>${apellido}</td><td>${codigo}</td><td>${edad}</td><td><i id="btn${id}" class="small material-icons modal-trigger btn-editar" href="#modal1">edit</i> <i id="del${id}" class="del red-text small material-icons">delete</i></td></tr>`;
 	$('#tablaEstudiantes tbody').append(markup);
 	$('#btn'+id).click(function(){
 		editando = id;
@@ -60,5 +66,10 @@ function agregarTabla(id, nombre, apellido, codigo, edad){
 		$('#codigoEdit').val(tds[3].innerHTML);
 		$('#edadEdit').val(tds[4].innerHTML);
 		M.updateTextFields();
+	});
+	$('#del'+id).click(function(){
+		// AJAX Request remove
+		// M.toast({html: 'Eliminando...'});
+		$("tr[name='"+ id +"']").remove();
 	});
 }
