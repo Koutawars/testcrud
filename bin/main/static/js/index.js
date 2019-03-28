@@ -1,6 +1,21 @@
 var editando; 
 
 $(document).ready(function(){
+	let request = $.ajax({
+		  url: "estudiantes",
+		  method: "GET"
+		});
+		 
+	request.done(function(data) {
+		data.forEach(function(e) {
+			agregarTabla(e.id, e.nombre, e.apellido, e.codigo, e.edad);
+		});
+	});
+	 
+	request.fail(function( jqXHR, textStatus ) {
+		M.toast({html: 'Falla a traer en la base de datos. code:'+jqXHR.status});
+	});
+		
   $('#boton').click(function(e){
 	  e.preventDefault();
 	  let nombre = $('#nombre').val();
@@ -14,7 +29,6 @@ $(document).ready(function(){
 		  console.log({nombre,apellido,codigo,edad});
 		  agregarTabla(0, nombre, apellido, codigo, edad);
 	  }
-	  
   });
   
   $('#editar').click(function(){

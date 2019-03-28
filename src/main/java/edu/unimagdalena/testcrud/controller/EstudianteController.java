@@ -12,14 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 import edu.unimagdalena.testcrud.entity.Estudiante;
 import edu.unimagdalena.testcrud.service.EstudianteService;
 
-@RestController
 @RequestMapping("/estudiantes")
+@RestController
 public class EstudianteController {
 	@Autowired
 	private EstudianteService estudianteService;
 	
-	@RequestMapping("/")
+	@RequestMapping
 	public List<Estudiante> getEstudiantes() {
+		System.out.print("\n\n\n ****************ENTRAAAAA! *********\n\n\n");
 		return estudianteService.getAllEstudiantes();
 	}
 	
@@ -35,6 +36,11 @@ public class EstudianteController {
 	
 	@RequestMapping(method=RequestMethod.DELETE, value = "/delete")
 	public void deleteEstudiante(@ModelAttribute float id) {
-		estudianteService.deleteEstudiante(id);;
+		estudianteService.deleteEstudiante(id);
+	}
+
+	@RequestMapping(method=RequestMethod.PUT, value = "/update")
+	public void updateEstudiante(@ModelAttribute Estudiante estudiante) {
+		estudianteService.updateEstudiante(estudiante);
 	}
 }

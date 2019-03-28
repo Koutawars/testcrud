@@ -22,6 +22,9 @@ public class Estudiante {
 	@Column
 	private int edad;
 	
+	public Estudiante() {
+		super();
+	}
 	
 	public Estudiante(long id, String nombre, String apellido, long codigo, int edad) {
 		super();
