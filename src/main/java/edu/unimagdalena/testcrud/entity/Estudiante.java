@@ -23,7 +23,6 @@ public class Estudiante {
 	private int edad;
 	
 	
-	
 	public Estudiante(long id, String nombre, String apellido, long codigo, int edad) {
 		super();
 		this.id = id;
