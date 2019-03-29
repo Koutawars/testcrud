@@ -47,7 +47,12 @@ $(document).ready(function(){
 			});
 			 
 			request.fail(function( jqXHR, textStatus ) {
-				M.toast({html: 'Fallo a inscribir. code:'+jqXHR.status});
+				console.log(jqXHR);
+				if(jqXHR.status == 409){
+					M.toast({html: 'Código duplicado, ya existe otro alumno con este codigo.'});
+				}else{
+					M.toast({html: 'Fallo a inscribir. code:'+jqXHR.status});
+				}
 			});
 	  }
   });
